@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image and Audio Interaction</title>
+    <style>
+        /* Стили для изображения, чтобы оно адаптировалось к размеру экрана */
+        #myImage {
+            max-width: 90%; /* Максимальная ширина 100% от родительского элемента */
+            height: auto; /* Автоматическая высота, чтобы сохранить пропорции */
+            display: block; /* Центрирование изображения */
+            margin: 0 auto; /* Центрирование изображения */
+        }
+        body {
+            text-align: center; /* Центрирование текста */
+        }
+    </style>
+</head>
+<body>
+    <h1> </h1>
+    
+    <!-- Добавление изображения с событием onclick -->
+    <img id="myImage" src="https://i.imgur.com/HeWwsHK.png" alt="Interactive Image" onclick="changeImageAndPlayAudio()">
+
+    <audio id="myAudio">
+        <source src="y2meta (mp3cut.net).mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает воспроизведение аудио.
+    </audio>
+
+    <script>
+        function changeImageAndPlayAudio() {
+            var image = document.getElementById("myImage");
+            var audio = document.getElementById("myAudio");
+
+            // Получаем текущее имя файла картинки без учета полного пути
+            var currentImage = image.src;
+
+            // Проверяем текущее изображение и меняем его
+            if (currentImage.includes("https://i.imgur.com/HeWwsHK.png")) {
+                image.src = "https://i.imgur.com/clv6slI.png";
+            } else {
+                image.src = "https://i.imgur.com/HeWwsHK.png"; // Возвращаем обратно, если нажать еще раз
+            }
+
+            // Запускаем аудио, если оно не воспроизводится
+            if (audio.paused) {
+                audio.play().catch(function(error) {
+                    console.log("Ошибка воспроизведения: " + error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
